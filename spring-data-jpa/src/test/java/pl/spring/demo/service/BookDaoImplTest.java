@@ -13,20 +13,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.exception.BookNotNullIdException;
+import pl.spring.demo.to.AuthorTo;
+import pl.spring.demo.to.BookEntity;
 import pl.spring.demo.to.BookTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
-public class BookServiceImplTest {
+public class BookDaoImplTest {
 
     @Autowired
-    private BookService bookService;
+    private BookDao bookDao;
 
     @Test
     public void testShouldFindAllBooks() {
         // when
-        List<BookTo> allBooks = bookService.findAllBooks();
+        List<BookEntity> allBooks = bookDao.findAll();
         // then
         assertNotNull(allBooks);
         assertFalse(allBooks.isEmpty());
@@ -38,7 +41,7 @@ public class BookServiceImplTest {
         // given
         final String title = "Opium w rosole";
         // when
-        List<BookTo> booksByTitle = bookService.findBooksByTitle(title);
+        List<BookEntity> booksByTitle = bookDao.findBookByTitle(title);
         // then
         assertNotNull(booksByTitle);
         assertFalse(booksByTitle.isEmpty());
@@ -47,9 +50,9 @@ public class BookServiceImplTest {
     @Test
     public void testShouldFindAllBooksByAuthor() {
     	// given
-    	final String author = "Jan Parandowski";
+    	final AuthorTo author = new AuthorTo(1L, "Jan", "Parandowski");
     	// when
-    	List<BookTo> booksByAuthor = bookService.findBooksByAuthor(author);
+    	List<BookEntity> booksByAuthor = bookDao.findBooksByAuthor(author);
     	// then
     	assertNotNull(booksByAuthor);
     	assertFalse(booksByAuthor.isEmpty());
@@ -58,10 +61,10 @@ public class BookServiceImplTest {
     @Test(expected = BookNotNullIdException.class)
     public void testShouldThrowBookNotNullIdException() {
         // given
-        final BookTo bookToSave = new BookTo();
+        final BookEntity bookToSave = new BookEntity();
         bookToSave.setId(22L);
         // when
-        bookService.saveBook(bookToSave);
+        bookDao.save(bookToSave);
         // then
         fail("test should throw BookNotNullIdException");
     }
