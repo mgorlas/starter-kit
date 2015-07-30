@@ -13,11 +13,18 @@ import pl.spring.demo.to.BookTo;
 public class MapperBook {
 
 	public BookTo convertBookEntityToBookTo(BookEntity bookEntity) {
-		return new BookTo(bookEntity.getId(), bookEntity.getTitle(), convertAuthorListToStringAuthor(bookEntity.getAuthors()));
+		String authors = null;
+		if (bookEntity.getAuthors() != null) {
+			authors = convertAuthorListToStringAuthor(bookEntity.getAuthors());
+		}
+		return new BookTo(bookEntity.getId(), bookEntity.getTitle(), authors);
 	}
 
 	public BookEntity convertBookToToBookEntity(BookTo bookTo) {
-		List<AuthorTo> authors = convertStringAuthorToAuthorToList(bookTo.getAuthors());
+		List<AuthorTo> authors = new ArrayList<>();
+		if (bookTo.getAuthors() != null) {
+			authors = convertStringAuthorToAuthorToList(bookTo.getAuthors());
+		}
 		return new BookEntity(bookTo.getId(), bookTo.getTitle(), authors);
 	}
 
@@ -36,25 +43,24 @@ public class MapperBook {
 		}
 		return bookList;
 	}
-	
-	public List<AuthorTo> convertStringAuthorToAuthorToList(String author){
+
+	public List<AuthorTo> convertStringAuthorToAuthorToList(String author) {
 		String[] splitAuthor = author.split(",");
 		List<AuthorTo> authors = new ArrayList<>();
 		long id = 1L;
-		for(int i = 0; i < splitAuthor.length; i++){
+		for (int i = 0; i < splitAuthor.length; i++) {
 			String[] nextAuthor = splitAuthor[i].split("\\s+");
-			authors.add(new AuthorTo(id * (i+1), nextAuthor[0], nextAuthor[1]));
-			i++;
+			authors.add(new AuthorTo(id * (i + 1), nextAuthor[0], nextAuthor[1]));
 		}
 		return authors;
 	}
-	
-	public AuthorTo convertStringAuthorToAuthorTo(String author){
+
+	public AuthorTo convertStringAuthorToAuthorTo(String author) {
 		String[] authorTo = author.split("\\s+");
 		return new AuthorTo(1L, authorTo[0], authorTo[1]);
 	}
-	
-	public String convertAuthorListToStringAuthor(List<AuthorTo> listAuthors){
+
+	public String convertAuthorListToStringAuthor(List<AuthorTo> listAuthors) {
 		String authors = "";
 		for (AuthorTo authorTo : listAuthors) {
 			authors += authorTo.getFirstName() + " " + authorTo.getLastName() + ", ";
