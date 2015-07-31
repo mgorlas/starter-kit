@@ -10,25 +10,25 @@ import pl.spring.demo.to.BookEntity;
 import pl.spring.demo.to.BookTo;
 
 @Component
-public class MapperBook {
+public class BookMapper {
 
 	public BookTo convertBookEntityToBookTo(BookEntity bookEntity) {
 		String authors = null;
 		if (bookEntity.getAuthors() != null) {
-			authors = convertAuthorListToStringAuthor(bookEntity.getAuthors());
+			authors = convertListAuthorsToStringAuthor(bookEntity.getAuthors());
 		}
 		return new BookTo(bookEntity.getId(), bookEntity.getTitle(), authors);
 	}
 
 	public BookEntity convertBookToToBookEntity(BookTo bookTo) {
-		List<AuthorTo> authors = new ArrayList<>();
+		List<AuthorTo> authors = null;
 		if (bookTo.getAuthors() != null) {
-			authors = convertStringAuthorToAuthorToList(bookTo.getAuthors());
+			authors = convertStringAuthorToListAuthors(bookTo.getAuthors());
 		}
 		return new BookEntity(bookTo.getId(), bookTo.getTitle(), authors);
 	}
 
-	public List<BookEntity> convertBookToListToBookEntityList(List<BookTo> bookToList) {
+	public List<BookEntity> convertListBookToToListBookEntity(List<BookTo> bookToList) {
 		List<BookEntity> bookList = new ArrayList<BookEntity>();
 		for (BookTo bookTo : bookToList) {
 			bookList.add(convertBookToToBookEntity(bookTo));
@@ -36,7 +36,7 @@ public class MapperBook {
 		return bookList;
 	}
 
-	public List<BookTo> convertBookEntityListToBookToList(List<BookEntity> bookEntityList) {
+	public List<BookTo> convertListBookEntityToListBookTo(List<BookEntity> bookEntityList) {
 		List<BookTo> bookList = new ArrayList<BookTo>();
 		for (BookEntity bookEntity : bookEntityList) {
 			bookList.add(convertBookEntityToBookTo(bookEntity));
@@ -44,28 +44,22 @@ public class MapperBook {
 		return bookList;
 	}
 
-	public List<AuthorTo> convertStringAuthorToAuthorToList(String author) {
+	public List<AuthorTo> convertStringAuthorToListAuthors(String author) {
 		String[] splitAuthor = author.split(",");
 		List<AuthorTo> authors = new ArrayList<>();
 		long id = 1L;
 		for (int i = 0; i < splitAuthor.length; i++) {
 			String[] nextAuthor = splitAuthor[i].split("\\s+");
-			authors.add(new AuthorTo(id * (i + 1), nextAuthor[0], nextAuthor[1]));
+			authors.add(new AuthorTo(id * (i + 1), nextAuthor[0], nextAuthor.length > 1 ? nextAuthor[1] : ""));
 		}
 		return authors;
 	}
 
-	public AuthorTo convertStringAuthorToAuthorTo(String author) {
-		String[] authorTo = author.split("\\s+");
-		return new AuthorTo(1L, authorTo[0], authorTo[1]);
-	}
-
-	public String convertAuthorListToStringAuthor(List<AuthorTo> listAuthors) {
+	public String convertListAuthorsToStringAuthor(List<AuthorTo> listAuthors) {
 		String authors = "";
 		for (AuthorTo authorTo : listAuthors) {
 			authors += authorTo.getFirstName() + " " + authorTo.getLastName() + ", ";
 		}
 		return authors.substring(0, authors.length() - 2);
 	}
-
 }
