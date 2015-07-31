@@ -11,7 +11,7 @@ public interface BookDao {
 
     List<BookEntity> findBookByTitle(String title);
 
-    List<BookEntity> findBooksByAuthor(AuthorTo author);
+    List<BookEntity> findBooksByAuthor(String author);
 
     BookEntity save(BookEntity book);
 }
