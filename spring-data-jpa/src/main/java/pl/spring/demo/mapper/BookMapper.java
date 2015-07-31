@@ -50,7 +50,7 @@ public class BookMapper {
 		long id = 1L;
 		for (int i = 0; i < splitAuthor.length; i++) {
 			String[] nextAuthor = splitAuthor[i].split("\\s+");
-			authors.add(new AuthorTo(id * (i + 1), nextAuthor.length > 1 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : ""));
+			authors.add(new AuthorTo(id * (i + 1), nextAuthor.length > 0 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : ""));
 		}
 		return authors;
 	}
