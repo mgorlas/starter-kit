@@ -41,4 +41,13 @@ public class BookEntity implements IdAware {
 	public void setAuthors(List<AuthorTo> authors) {
 		this.authors = authors;
 	}
+
+	public String toString(){
+		String authors = "";
+		for (AuthorTo authorTo : this.authors) {
+			authors += authorTo.getFirstName() + " " + authorTo.getLastName() + ", ";
+		}
+		authors = authors.substring(0, authors.length() - 2);
+		return "Title: " + title + " Authors: " + authors;
+	}
 }

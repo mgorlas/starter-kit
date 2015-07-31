@@ -5,25 +5,25 @@ package pl.spring.demo.mock;
  * All rights reserved
  */
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
+import org.mockito.ArgumentCaptor;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import pl.spring.demo.common.Sequence;
 import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.mapper.BookMapper;
 import pl.spring.demo.service.impl.BookServiceImpl;
-import pl.spring.demo.to.AuthorTo;
 import pl.spring.demo.to.BookEntity;
 import pl.spring.demo.to.BookTo;
-
-import static org.junit.Assert.*;
-
-import java.util.Arrays;
 
 /**
  * TODO The class BookServiceImplTest is supposed to be documented...

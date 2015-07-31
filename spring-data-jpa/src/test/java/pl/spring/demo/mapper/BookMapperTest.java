@@ -13,22 +13,21 @@ import pl.spring.demo.to.AuthorTo;
 import pl.spring.demo.to.BookEntity;
 import pl.spring.demo.to.BookTo;
 
-
 public class BookMapperTest {
 
 	private BookMapper bookMapper;
-	
-    @Before
-    public void setUpt() {
-    	bookMapper = new BookMapper();
-    }
+
+	@Before
+	public void setUpt() {
+		bookMapper = new BookMapper();
+	}
 
 	@Test
 	public void testShouldConvertBookToToBookEntity() {
 		// given
 		BookTo bookTo = new BookTo(1L, "title", "authorFirstName authorLastName");
 		// when
-		BookEntity bookEntity = bookMapper.convertBookToToBookEntity(bookTo);
+		BookEntity bookEntity = bookMapper.convertBookToOnBookEntity(bookTo);
 		// then
 		assertNotNull(bookEntity);
 		assertNotNull(bookTo);
@@ -42,7 +41,7 @@ public class BookMapperTest {
 		// given
 		BookTo bookTo = new BookTo(1L, "title", "authorFirstName");
 		// when
-		BookEntity bookEntity = bookMapper.convertBookToToBookEntity(bookTo);
+		BookEntity bookEntity = bookMapper.convertBookToOnBookEntity(bookTo);
 		// then
 		assertNotNull(bookEntity);
 		assertNotNull(bookTo);
@@ -54,16 +53,17 @@ public class BookMapperTest {
 	@Test
 	public void testShouldConvertBookEntityToBookTo() {
 		// given
-		BookEntity bookEntity = new BookEntity(1L, "title", Arrays.asList(new AuthorTo(1L, "authorFirstName", "authorLastName")));
+		BookEntity bookEntity = new BookEntity(1L, "title",
+				Arrays.asList(new AuthorTo(1L, "authorFirstName", "authorLastName")));
 		// when
-		BookTo bookTo = bookMapper.convertBookEntityToBookTo(bookEntity);
+		BookTo bookTo = bookMapper.convertBookEntityOnBookTo(bookEntity);
 		// then
 		assertNotNull(bookEntity);
 		assertNotNull(bookTo);
 		assertEquals("title", bookTo.getTitle());
 		assertEquals("authorFirstName authorLastName", bookTo.getAuthors());
 	}
-	
+
 	@Test
 	public void testShouldConvertBookToListToBookEntityList() {
 		// given
@@ -72,46 +72,47 @@ public class BookMapperTest {
 				new BookEntity(2L, "title2", Arrays.asList(new AuthorTo(1L, "authorFirstName2", "authorLastName2"))),
 				new BookEntity(3L, "title3", Arrays.asList(new AuthorTo(1L, "authorFirstName3", "authorLastName3"))));
 		// when
-		List<BookTo> bookToList = bookMapper.convertListBookEntityToListBookTo(bookEntityList);
+		List<BookTo> bookToList = bookMapper.convertListBookEntityOnListBookTo(bookEntityList);
 		// then
 		assertNotNull(bookEntityList);
 		assertNotNull(bookToList);
 		assertEquals(3, bookToList.size());
 	}
+
 	@Test
 	public void testShouldConvertBookEntityListToBookToList() {
 		// given
-		List<BookTo> bookToList = Arrays.asList(
-				new BookTo(1L, "title1", "authorFirstName1 authorLastName1"),
+		List<BookTo> bookToList = Arrays.asList(new BookTo(1L, "title1", "authorFirstName1 authorLastName1"),
 				new BookTo(2L, "title2", "authorFirstName2 authorLastName2"),
 				new BookTo(3L, "title3", "authorFirstName3 authorLastName3"));
 		// when
-		List<BookEntity> bookEntityList = bookMapper.convertListBookToToListBookEntity(bookToList);
+		List<BookEntity> bookEntityList = bookMapper.convertListBookToOnListBookEntity(bookToList);
 		// then
 		assertNotNull(bookEntityList);
 		assertNotNull(bookToList);
 		assertEquals(3, bookEntityList.size());
 	}
+
 	@Test
 	public void testShouldConvertBookToAuthorToBookEntityAuthor() {
 		// given
 		String bookToAuthors = "authorFirstName1 authorLastName1, authorFirstName2 authorLastName2, authorFirstName3 authorLastName3";
 		// when
-		List<AuthorTo> bookEntityAuthors = bookMapper.convertStringAuthorToListAuthors(bookToAuthors);
+		List<AuthorTo> bookEntityAuthors = bookMapper.convertStringAuthorOnListAuthors(bookToAuthors);
 		// then
 		assertNotNull(bookToAuthors);
 		assertNotNull(bookEntityAuthors);
 		assertEquals(3, bookEntityAuthors.size());
 	}
+
 	@Test
 	public void testShouldConvertBookEntityAuthorToBookToAuthor() {
 		// given
-		List<AuthorTo> bookEntityAuthors = Arrays.asList(
-				new AuthorTo(1L, "authorFirstName1", "authorLastName1"),
+		List<AuthorTo> bookEntityAuthors = Arrays.asList(new AuthorTo(1L, "authorFirstName1", "authorLastName1"),
 				new AuthorTo(2L, "authorFirstName2", "authorLastName2"),
 				new AuthorTo(3L, "authorFirstName3", "authorLastName3"));
 		// when
-		String bookToAuthors = bookMapper.convertListAuthorsToStringAuthor(bookEntityAuthors);
+		String bookToAuthors = bookMapper.convertListAuthorsOnStringAuthor(bookEntityAuthors);
 		// then
 		assertNotNull(bookToAuthors);
 		assertNotNull(bookEntityAuthors);

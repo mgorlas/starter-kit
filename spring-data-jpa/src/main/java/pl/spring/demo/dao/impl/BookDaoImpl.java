@@ -28,48 +28,6 @@ public class BookDaoImpl implements BookDao {
 	}
 
 	@Override
-	public List<BookEntity> findBookByTitle(String title) {
-		List<BookEntity> foundBooks = new ArrayList<>();
-		for (BookEntity bookEntity : ALL_BOOKS) {
-			if ((bookEntity.getTitle().toLowerCase()).startsWith(title.toLowerCase())) {
-				foundBooks.add(bookEntity);
-			}
-		}
-		return foundBooks;
-	}
-
-	@Override
-	public List<BookEntity> findBooksByAuthor(String author) {
-		List<BookEntity> foundBooks = new ArrayList<>();
-
-		String[] authorData = author.split("\\s+");
-
-		switch (authorData.length) {
-		case 1:
-			for (BookEntity bookEntity : ALL_BOOKS) {
-				for (AuthorTo authorTo : bookEntity.getAuthors()) {
-					if ((authorTo.getFirstName().toLowerCase()).startsWith(authorData[0].toLowerCase())
-							|| (authorTo.getLastName().toLowerCase()).startsWith(authorData[0].toLowerCase())) {
-						foundBooks.add(bookEntity);
-					}
-				}
-			}
-			break;
-		case 2:
-			for (BookEntity bookEntity : ALL_BOOKS) {
-				for (AuthorTo authorTo : bookEntity.getAuthors()) {
-					if (((authorTo.getFirstName()).equalsIgnoreCase(authorData[0]) && (authorTo.getLastName()).equalsIgnoreCase(authorData[1])) 
-							|| ((authorTo.getFirstName()).equalsIgnoreCase(authorData[1]) && (authorTo.getLastName()).equalsIgnoreCase(authorData[0]))){
-						foundBooks.add(bookEntity);
-					}
-				}
-			}
-			break;
-		}
-		return foundBooks;
-	}
-
-	@Override
 	@NullableId
 	public BookEntity save(BookEntity book) {
 		ALL_BOOKS.add(book);
@@ -84,12 +42,55 @@ public class BookDaoImpl implements BookDao {
 		this.sequence = sequence;
 	}
 
+	@Override
+	public List<BookEntity> findBooksByTitle(String title) {
+		List<BookEntity> foundBooks = new ArrayList<>();
+		for (BookEntity bookEntity : ALL_BOOKS) {
+			if ((bookEntity.getTitle().toLowerCase()).startsWith(title.toLowerCase())) {
+				foundBooks.add(bookEntity);
+			}
+		}
+		return foundBooks;
+	}
+
+	@Override
+	public List<BookEntity> findBooksByAuthor(String author) {
+		List<BookEntity> foundBooks = new ArrayList<>();
+		String[] dataAuthor = author.split("\\s+");
+
+		switch (dataAuthor.length) {
+		case 1:
+			for (BookEntity bookEntity : ALL_BOOKS) {
+				for (AuthorTo authorTo : bookEntity.getAuthors()) {
+					if ((authorTo.getFirstName().toLowerCase()).startsWith(dataAuthor[0].toLowerCase())
+							|| (authorTo.getLastName().toLowerCase()).startsWith(dataAuthor[0].toLowerCase())) {
+						foundBooks.add(bookEntity);
+					}
+				}
+			}
+			break;
+		case 2:
+			for (BookEntity bookEntity : ALL_BOOKS) {
+				for (AuthorTo authorTo : bookEntity.getAuthors()) {
+					if (((authorTo.getFirstName()).equalsIgnoreCase(dataAuthor[0])
+							&& (authorTo.getLastName()).equalsIgnoreCase(dataAuthor[1]))
+							|| ((authorTo.getFirstName()).equalsIgnoreCase(dataAuthor[1])
+									&& (authorTo.getLastName()).equalsIgnoreCase(dataAuthor[0]))) {
+						foundBooks.add(bookEntity);
+					}
+				}
+			}
+			break;
+		}
+		return foundBooks;
+	}
+
 	private void addTestBooks() {
 		ALL_BOOKS.add(new BookEntity(1L, "Romeo i Julia", Arrays.asList(new AuthorTo(1L, "Wiliam", "Szekspir"))));
 		ALL_BOOKS.add(new BookEntity(2L, "Opium w rosole", Arrays.asList(new AuthorTo(2L, "Hanna", "Ożogowska"))));
 		ALL_BOOKS.add(new BookEntity(3L, "Przygody Odyseusza", Arrays.asList(new AuthorTo(3L, "Jan", "Parandowski"))));
 		ALL_BOOKS.add(new BookEntity(4L, "Awantura w Niekłaju", Arrays.asList(new AuthorTo(4L, "Edmund", "Niziurski"))));
-		ALL_BOOKS.add(new BookEntity(5L, "Pan Samochodzik i Fantomas",Arrays.asList(new AuthorTo(5L, "Zbigniew", "Nienacki"))));
+		ALL_BOOKS.add(new BookEntity(5L, "Pan Samochodzik i Fantomas", Arrays.asList(new AuthorTo(5L, "Zbigniew", "Nienacki"))));
 		ALL_BOOKS.add(new BookEntity(6L, "Zemsta", Arrays.asList(new AuthorTo(6L, "Aleksander", "Fredro"))));
 	}
 }

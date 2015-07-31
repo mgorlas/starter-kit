@@ -5,8 +5,6 @@ public class AuthorTo implements IdAware {
 	private String firstName;
 	private String lastName;
 
-	public AuthorTo() {}
-
 	public AuthorTo(Long id, String firstName, String lastName) {
 		this.id = id;
 		this.firstName = firstName;
@@ -36,5 +34,9 @@ public class AuthorTo implements IdAware {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public String toString() {
+		return firstName + " " + lastName;
 	}
 }

@@ -1,4 +1,4 @@
-package pl.spring.demo.service;
+package pl.spring.demo.dao;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -16,7 +16,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.spring.demo.common.Sequence;
-import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.AuthorTo;
 import pl.spring.demo.to.BookEntity;
@@ -45,7 +44,7 @@ public class BookDaoImplTest {
 		// given
 		final String title = "Opiu";
 		// when
-		List<BookEntity> booksByTitle = bookDao.findBookByTitle(title);
+		List<BookEntity> booksByTitle = bookDao.findBooksByTitle(title);
 		// then
 		assertNotNull(booksByTitle);
 		assertFalse(booksByTitle.isEmpty());
@@ -54,9 +53,9 @@ public class BookDaoImplTest {
 	@Test
 	public void testShouldFindAllBooksByTitle() {
 		// given
-		final String title = "Opium W Rosole";
+		final String title = "OpIuM W RoSOLE";
 		// when
-		List<BookEntity> booksByTitle = bookDao.findBookByTitle(title);
+		List<BookEntity> booksByTitle = bookDao.findBooksByTitle(title);
 		// then
 		assertNotNull(booksByTitle);
 		assertFalse(booksByTitle.isEmpty());
@@ -72,7 +71,7 @@ public class BookDaoImplTest {
 		assertNotNull(booksByAuthor);
 		assertFalse(booksByAuthor.isEmpty());
 	}
-	
+
 	@Test
 	public void testShouldFindAllBooksByFragmentAuthorsFirstName() {
 		// given
@@ -83,10 +82,11 @@ public class BookDaoImplTest {
 		assertNotNull(booksByAuthor);
 		assertFalse(booksByAuthor.isEmpty());
 	}
+
 	@Test
 	public void testShouldFindAllBooksByFragmentAuthorsLastName() {
 		// given
-		final String author = "Parandowsk";
+		final String author = "Parando";
 		// when
 		List<BookEntity> booksByAuthor = bookDao.findBooksByAuthor(author);
 		// then
@@ -105,13 +105,13 @@ public class BookDaoImplTest {
 		fail("test should throw BookNotNullIdException");
 	}
 
-	@SuppressWarnings("unchecked")
 	@Test
 	public void testShouldBookWithId() {
 		// given
-		final BookEntity bookToSave = new BookEntity(null, "Kubus puchatek", Arrays.asList(new AuthorTo(2l, "Milne", "Alexander")));
+		final BookEntity bookToSave = new BookEntity(null, "Kubus puchatek",
+				Arrays.asList(new AuthorTo(2l, "Milne", "Alexander")));
 		Mockito.when(sequence.nextValue(Mockito.anyCollection())).thenReturn(6L);
-		//when
+		// when
 		bookDao.save(bookToSave);
 		// then
 		Mockito.verify(sequence).nextValue(Mockito.anyCollection());
