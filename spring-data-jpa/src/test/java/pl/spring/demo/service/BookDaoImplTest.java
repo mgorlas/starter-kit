@@ -3,7 +3,6 @@ package pl.spring.demo.service;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
 import java.util.Arrays;
@@ -12,24 +11,24 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.spring.demo.common.Sequence;
 import pl.spring.demo.dao.BookDao;
 import pl.spring.demo.exception.BookNotNullIdException;
 import pl.spring.demo.to.AuthorTo;
 import pl.spring.demo.to.BookEntity;
-import pl.spring.demo.to.BookTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "CommonServiceTest-context.xml")
+@ContextConfiguration(locations = "BookDaoImplTest-context.xml")
 public class BookDaoImplTest {
 
 	@Autowired
 	private BookDao bookDao;
+	@Autowired
+	private Sequence sequence;
 
 	@Test
 	public void testShouldFindAllBooks() {
@@ -38,7 +37,7 @@ public class BookDaoImplTest {
 		// then
 		assertNotNull(allBooks);
 		assertFalse(allBooks.isEmpty());
-		assertEquals(6, allBooks.size());
+		assertEquals(7, allBooks.size());
 	}
 
 	@Test
@@ -106,14 +105,17 @@ public class BookDaoImplTest {
 		fail("test should throw BookNotNullIdException");
 	}
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void testShouldBookWithId() {
 		// given
-		final BookEntity bookToSave = new BookEntity();
-		
+		final BookEntity bookToSave = new BookEntity(null, "Kubus puchatek", Arrays.asList(new AuthorTo(2l, "Milne", "Alexander")));
+		Mockito.when(sequence.nextValue(Mockito.anyCollection())).thenReturn(6L);
 		//when
-		Mockito.when(bookDao.save(bookToSave)).thenReturn(new BookEntity(11L, null, null));
+		bookDao.save(bookToSave);
 		// then
-		assertEquals(11L, bookToSave.getId().longValue());
+		Mockito.verify(sequence).nextValue(Mockito.anyCollection());
+		assertNotNull(bookToSave.getId().longValue());
+		assertEquals(6L, bookToSave.getId().longValue());
 	}
 }
