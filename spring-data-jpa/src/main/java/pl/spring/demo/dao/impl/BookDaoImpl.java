@@ -57,32 +57,18 @@ public class BookDaoImpl implements BookDao {
 	public List<BookEntity> findBooksByAuthor(String author) {
 		List<BookEntity> foundBooks = new ArrayList<>();
 		String[] dataAuthor = author.split("\\s+");
-
-		switch (dataAuthor.length) {
-		case 1:
 			for (BookEntity bookEntity : ALL_BOOKS) {
 				for (AuthorTo authorTo : bookEntity.getAuthors()) {
-					if ((authorTo.getFirstName().toLowerCase()).startsWith(dataAuthor[0].toLowerCase())
-							|| (authorTo.getLastName().toLowerCase()).startsWith(dataAuthor[0].toLowerCase())) {
-						foundBooks.add(bookEntity);
+					if (bookWasWrittenByGivenAuthor(authorTo, dataAuthor[0])) {
+						if(dataAuthor.length == 1 || (dataAuthor.length > 1 && bookWasWrittenByGivenAuthor(authorTo, dataAuthor[1]))) foundBooks.add(bookEntity);
 					}
 				}
 			}
-			break;
-		case 2:
-			for (BookEntity bookEntity : ALL_BOOKS) {
-				for (AuthorTo authorTo : bookEntity.getAuthors()) {
-					if (((authorTo.getFirstName()).equalsIgnoreCase(dataAuthor[0])
-							&& (authorTo.getLastName()).equalsIgnoreCase(dataAuthor[1]))
-							|| ((authorTo.getFirstName()).equalsIgnoreCase(dataAuthor[1])
-									&& (authorTo.getLastName()).equalsIgnoreCase(dataAuthor[0]))) {
-						foundBooks.add(bookEntity);
-					}
-				}
-			}
-			break;
-		}
 		return foundBooks;
+	}
+	
+	private boolean bookWasWrittenByGivenAuthor(AuthorTo author, String name){
+		return (author.getFirstName().toLowerCase()).startsWith(name.toLowerCase()) || (author.getLastName().toLowerCase()).startsWith(name.toLowerCase());
 	}
 
 	private void addTestBooks() {

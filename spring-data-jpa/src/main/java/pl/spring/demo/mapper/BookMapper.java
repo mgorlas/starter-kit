@@ -56,9 +56,9 @@ public class BookMapper {
 	}
 
 	public String convertListAuthorsOnStringAuthor(List<AuthorTo> listAuthors) {
-		String authors = "";
+		StringBuilder authors = new StringBuilder("");
 		for (AuthorTo authorTo : listAuthors) {
-			authors += authorTo.getFirstName() + " " + authorTo.getLastName() + ", ";
+			authors.append(authorTo.getFirstName() + " " + authorTo.getLastName() + ", ");
 		}
 		return authors.substring(0, authors.length() - 2);
 	}

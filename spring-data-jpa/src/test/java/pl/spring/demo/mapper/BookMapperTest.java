@@ -118,5 +118,6 @@ public class BookMapperTest {
 		assertNotNull(bookEntityAuthors);
 		assertEquals(3, bookToAuthors.split(",").length);
 		assertEquals(6, bookToAuthors.split("\\s+").length);
+		assertEquals(bookToAuthors, "authorFirstName1 authorLastName1, authorFirstName2 authorLastName2, authorFirstName3 authorLastName3" );
 	}
 }

@@ -61,9 +61,19 @@ public class BookDaoImplTest {
 	}
 
 	@Test
-	public void testShouldFindAllBooksByAuthor() {
+	public void testShouldFindAllBooksByAuthorFirstNameLastName() {
 		// given
 		final String author = "Jan Parandowski";
+		// when
+		List<BookEntity> booksByAuthor = bookDao.findBooksByAuthor(author);
+		// then
+		assertNotNull(booksByAuthor);
+		assertFalse(booksByAuthor.isEmpty());
+	}
+	@Test
+	public void testShouldFindAllBooksByAuthorLastNameFirstName() {
+		// given
+		final String author = "Parandowski Jan";
 		// when
 		List<BookEntity> booksByAuthor = bookDao.findBooksByAuthor(author);
 		// then
