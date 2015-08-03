@@ -36,7 +36,6 @@ public class BookDaoImplTest {
 		// then
 		assertNotNull(allBooks);
 		assertFalse(allBooks.isEmpty());
-		assertEquals(7, allBooks.size());
 	}
 
 	@Test
