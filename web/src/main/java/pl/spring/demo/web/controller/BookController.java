@@ -25,15 +25,21 @@ public class BookController {
 		return "bookList";
 	}
 
-	@RequestMapping(value = "/book-delete/{bookId}", method = RequestMethod.GET)
-	public String deleteBook(@PathVariable Long bookId, Map<String, Object> params) {
+	@RequestMapping(value = "/book-delete", method = RequestMethod.GET)
+	public String deleteBook(@RequestParam("buttonDelete") String bookId, Map<String, Object> params) {
+		Long bookIdLong = ((Integer)Integer.parseInt(bookId)).longValue();
 		final List<BookTo> allBooks = bookService.findAllBooks();
-		BookTo book = null;
 		for (BookTo bookTo : allBooks) {
-			if(bookTo.getId() == bookId) book = bookTo;
+			if(bookTo.getId() == bookIdLong) {
+				params.put("bookDelete", bookTo.getTitle());
+			}
 		}
-		bookService.deleteBook(book.getId());
-		params.put("bookDelete", book.getTitle());
-		return "bookList";
+		bookService.deleteBook(bookIdLong);
+		return "redirect:/delete-book";
+	}
+	
+	@RequestMapping(value = "/delete-book", method = RequestMethod.GET)
+	public String deleteBook(Map<String, Object> params) {
+		return "deleteBook";
 	}
 }

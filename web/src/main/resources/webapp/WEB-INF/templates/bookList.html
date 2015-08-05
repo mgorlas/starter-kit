@@ -2,7 +2,8 @@
 <html xmlns:th="http://thymeleaf.org">
 <head lang="en">
 <meta charset="UTF-8" />
-<link rel="stylesheet" th:href="@{/static/application.css}" href="/static/application.css" />
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
 <title>List of books</title>
 </head>
 <body>
@@ -18,7 +19,9 @@
 			<td th:text="${book.title}">title</td>
 			<td th:text="${book.authors}">authors</td>
 			<td>
-    			<button type="button" class="deleteBook" onclick ="location.href='book-delete'" value="${book.title}">Delete</button>
+				<form action="book-delete" method="get">
+					<button type="submit" class="deleteBook" th:value="${book.id}" name="buttonDelete">Delete</button>
+				</form>
 			</td>
 		</tr>
 	</table>
