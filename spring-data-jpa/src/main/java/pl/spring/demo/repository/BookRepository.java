@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import pl.spring.demo.entity.BookEntity;
+import pl.spring.demo.to.BookTo;
 
 import java.util.List;
 

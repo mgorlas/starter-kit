@@ -12,16 +12,26 @@ import java.util.List;
 @ResponseBody
 public class BookRestService {
 
-    @Autowired
-    private BookService bookService;
+	@Autowired
+	private BookService bookService;
 
-    @RequestMapping(value = "/books-by-title", method = RequestMethod.GET)
-    public List<BookTo> findBooksByTitle(@RequestParam("titlePrefix") String titlePrefix) {
-        return bookService.findBooksByTitle(titlePrefix);
-    }
+	@RequestMapping(value = "/books-by-title", method = RequestMethod.GET)
+	public List<BookTo> findBooksByTitle(@RequestParam("titlePrefix") String titlePrefix) {
+		return bookService.findBooksByTitle(titlePrefix);
+	}
 
-    @RequestMapping(value = "/book", method = RequestMethod.POST)
-    public BookTo saveBook(@RequestBody BookTo book) {
-        return bookService.saveBook(book);
-    }
+	@RequestMapping(value = "/book", method = RequestMethod.POST)
+	public BookTo saveBook(@RequestBody BookTo book) {
+		return bookService.saveBook(book);
+	}
+
+	@RequestMapping(value = "/book", method = RequestMethod.PUT)
+	public BookTo updateBook(@RequestBody BookTo book) {
+		return bookService.updateBook(book);
+	}
+
+	@RequestMapping(value = "/book", method = RequestMethod.DELETE)
+	public void deleteBook(@RequestBody BookTo book) {
+		bookService.deleteBook(book.getId());
+	}
 }

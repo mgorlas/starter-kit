@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head lang="en">
+<meta charset="UTF-8" />
+<link rel="stylesheet" th:href="@{/static/application.css}"
+	href="/static/application.css" />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+<title>Delete book</title>
+</head>
+<body>
+	<div class="notification-removed-book">
+		<p>Well done!</p>
+		<p class="text-book-removed">
+			Book with the title <span class="title-book-removed"
+				th:text="${bookRemoved}">bookDelete Title</span> has been removed
+		</p>
+		<form action="books" method="get" class="form-book-removed">
+			<button type="submit" class="button-removed-ok">
+				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+			</button>
+		</form>
+	</div>
+</body>
+</html>
