@@ -9,13 +9,13 @@
 <title>Delete book</title>
 </head>
 <body>
-	<div class="notification-removed-book">
-		<p>Well done!</p>
-		<p class="text-book-removed">
+	<div class="notification-removed-book row center-block">
+		<p class="col-md-2">Well done!</p>
+		<p class="text-book-removed col-md-7">
 			Book with the title <span class="title-book-removed"
 				th:text="${bookRemoved}">bookDelete Title</span> has been removed
 		</p>
-		<form action="books" method="get" class="form-book-removed">
+		<form action="books" method="get" class="form-book-removed col-md-3">
 			<button type="submit" class="button-removed-ok">
 				<span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
 			</button>

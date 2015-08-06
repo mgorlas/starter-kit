@@ -91,7 +91,7 @@ public class BookRestServiceTest {
     @Test
     public void testShouldRemoveBook() throws Exception {
     	// given
-        File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToSave.json");
+        File file = FileUtils.getFileFromClasspath("classpath:pl/spring/demo/web/json/bookToRemove.json");
         String json = FileUtils.readFileToString(file);
         // when
         ResultActions response = this.mockMvc.perform(delete("/book")
@@ -99,6 +99,7 @@ public class BookRestServiceTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(json.getBytes()));
         // then
+        Mockito.verify(bookService).deleteBook(Mockito.anyLong());
         response.andExpect(status().isOk());
     }
 

@@ -9,6 +9,44 @@
 	width: 800px;
 }
 
+tbody:hover td {
+	color: transparent;
+	text-shadow: 0px 2px #aaa;
+}
+
+tbody:hover td button {
+	color: transparent;
+	background-color: transparent;
+	border-color: transparent;
+	text-shadow: 0px 2px #aaa;
+}
+
+tbody:hover tr:hover td button {
+	background-color: #E74C3C;
+	border-bottom: 5px solid #BD3E31;
+	border-left-color: #FFF;
+	border-top-color: #FFF;
+	border-right-color: #dddddd;
+	text-shadow: 0px -2px #BD3E31;
+	color: #FFF;
+	text-shadow: 0px -2px #BD3E31
+}
+
+tbody:hover tr:hover td button:hover {
+	background-color: #E74C3C;
+	border-bottom: 5px solid #d25b4f;
+	border-left: 2px solid #7f7f7f;
+	border-top: 2px solid #7f7f7f;
+	border-right-color: #FFF;
+	text-shadow: 0px -2px #BD3E31;
+	color: #FFF;
+}
+
+tbody:hover tr:hover td {
+	color: #444;
+	text-shadow: 0 1px 0 #fff;
+}
+
 .tableBooks th {
 	background: url(http://jackrugile.com/images/misc/noise-diagonal.png),
 		linear-gradient(#777, #444);
@@ -69,6 +107,7 @@
 	background-color: #E74C3C;
 	border-bottom: 5px solid #BD3E31;
 	text-shadow: 0px -2px #BD3E31;
+	color: #FFF;
 	position: relative;
 	padding: 7px 7px;
 	margin: 0px 5px 5px 0px;
@@ -76,13 +115,12 @@
 	border-radius: 10px;
 	font-family: 'Pacifico', cursive;
 	font-size: 15px;
-	color: #FFF;
 	text-decoration: none;
 }
 
 .notification-removed-book {
 	background-color: #6ac895;
-	width: 60%;
+	width: 70%;
 	display: block;
 	margin: 0 auto;
 	margin-top: 15%;
@@ -99,13 +137,14 @@
 	color: white;
 }
 
-.form-book-removed{
+.form-book-removed {
 	display: inline;
 }
 
 .notification-removed-book .text-book-removed {
 	padding-left: 30px;
 	font-size: 20px;
+	margin-top: 5%;
 }
 
 .notification-removed-book p:FIRST-CHILD {
@@ -113,11 +152,11 @@
 	color: white;
 	padding-left: 20px;
 	padding-right: 20px;
-	padding-bottom: 40px;
-	padding-top: 40px;
+	padding-bottom: 50px;
+	padding-top: 50px;
 	margin: 0px;
 	font-weight: bold;
-	font-size: 24px;
+	font-size: 25px;
 	border-top-left-radius: 8px;
 	border-bottom-left-radius: 8px;
 }
@@ -132,11 +171,33 @@
 	border-radius: 15px;
 	padding: 5px 8px 5px 8px;
 	padding: 15px 30px;
-	margin-left: 10%;
+	margin-left: 2%;
+	margin-top: 45px;
 }
+
 .button-removed-ok:hover {
 	color: white;
 	border: 2px solid white;
 	background-color: #3A9E67;
 	opacity: 0.8;
+}
+
+@media ( max-width : 994px) {
+	.notification-removed-book p:FIRST-CHILD {
+		padding-left: 49px;
+		padding-right: 49px;
+		padding-bottom: 50px;
+		padding-top: 50px;
+		margin: 0px;
+		font-weight: bold;
+		font-size: 25px;
+		border-top-left-radius: 8px;
+		border-top-right-radius: 8px;
+		border-bottom-left-radius: 0px;
+	}
+	.button-removed-ok {
+		margin-left: 20%;
+		margin-bottom: 5%;
+		margin-top: 5%;
+	}
 }
