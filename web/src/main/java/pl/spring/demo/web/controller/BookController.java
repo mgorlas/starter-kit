@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import pl.spring.demo.service.BookService;
 import pl.spring.demo.to.BookTo;
@@ -25,21 +26,11 @@ public class BookController {
 		return "bookList";
 	}
 
-	@RequestMapping(value = "/book-delete", method = RequestMethod.GET)
-	public String deleteBook(@RequestParam("buttonDelete") String bookId, Map<String, Object> params) {
-		Long bookIdLong = ((Integer)Integer.parseInt(bookId)).longValue();
-		final List<BookTo> allBooks = bookService.findAllBooks();
-		for (BookTo bookTo : allBooks) {
-			if(bookTo.getId() == bookIdLong) {
-				params.put("bookDelete", bookTo.getTitle());
-			}
-		}
-		bookService.deleteBook(bookIdLong);
-		return "redirect:/delete-book";
-	}
-	
-	@RequestMapping(value = "/delete-book", method = RequestMethod.GET)
-	public String deleteBook(Map<String, Object> params) {
-		return "deleteBook";
+	@RequestMapping(value = "/book-removed", method = RequestMethod.GET)
+	public String deleteBook(@RequestParam("buttonDelete") int bookId, Map<String, Object> params) {
+		BookTo bookTo = bookService.findBookById(((Integer)bookId).longValue());
+		params.put("bookRemoved", bookTo.getTitle());
+		bookService.deleteBook(bookTo.getId());
+		return "removedBook";
 	}
 }
