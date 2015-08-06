@@ -27,10 +27,14 @@ public class BookController {
 	}
 
 	@RequestMapping(value = "/book-removed", method = RequestMethod.GET)
-	public String deleteBook(@RequestParam("buttonDelete") int bookId, Map<String, Object> params) {
-		BookTo bookTo = bookService.findBookById(((Integer)bookId).longValue());
-		params.put("bookRemoved", bookTo.getTitle());
+	public String deleteBook(@RequestParam("buttonDelete") Long bookId, RedirectAttributes redirectAttributes) {
+		BookTo bookTo = bookService.findBookById(bookId);
+		redirectAttributes.addFlashAttribute("removedBookTitle", bookTo.getTitle());
 		bookService.deleteBook(bookTo.getId());
+		return "redirect:/successful-removed-book";
+	}
+	@RequestMapping(value = "/successful-removed-book", method = RequestMethod.GET)
+	public String returnTitleRemovedBook() {
 		return "removedBook";
 	}
 }
