@@ -1,9 +1,9 @@
 package pl.spring.demo.dao;
 
-import pl.spring.demo.entity.LibraryEntity;
-
 import java.util.List;
 
+import pl.spring.demo.entity.LibraryEntity;
+
 public interface LibraryDao extends Dao<LibraryEntity, Long> {
-    List<LibraryEntity> findLibraryByName(String Name);
+	List<LibraryEntity> findLibraryByName(String Name);
 }
