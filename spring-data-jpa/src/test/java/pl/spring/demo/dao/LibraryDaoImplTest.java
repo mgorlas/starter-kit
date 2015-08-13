@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.entity.LibraryEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -23,7 +22,7 @@ public class LibraryDaoImplTest {
     private LibraryDao libraryDao;
 
     @Test
-    public void testShouldFindBooksByNamePrefix() {
+    public void testShouldFindLibraryByNamePrefix() {
         // given
         final String libraryName = "biblio";
         // when
@@ -34,7 +33,7 @@ public class LibraryDaoImplTest {
         assertEquals("Biblioteka wrocławska", libraryEntity.get(0).getName());
     }
     @Test
-    public void testShouldFindBooksByFullName() {
+    public void testShouldFindLibraryByFullName() {
     	// given
     	final String libraryName = "BIBLIOTEKA Warszawska";
     	// when
@@ -43,5 +42,14 @@ public class LibraryDaoImplTest {
     	assertNotNull(libraryEntity);
     	assertFalse(libraryEntity.isEmpty());
     	assertEquals("Biblioteka Warszawska", libraryEntity.get(0).getName());
+    }
+    @Test
+    public void testShouldRemoveAllBooksInTheLibrary() {
+    	// given
+    	final Long libraryId = 1L;
+    	// when
+    	LibraryEntity le = libraryDao.findOne(libraryId);
+    	libraryDao.delete(le);
+    	
     }
 }

@@ -1,10 +1,9 @@
 package pl.spring.demo.repository;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 import java.util.List;
+import java.util.Set;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import pl.spring.demo.entity.BookEntity;
 import pl.spring.demo.entity.LibraryEntity;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -44,4 +44,20 @@ public class LibraryRepositoryTest {
 		assertFalse(libraryEntity.isEmpty());
 		assertEquals("Biblioteka Warszawska", libraryEntity.get(0).getName());
 	}
+
+	@Test
+	public void testShouldRemoveAllBookInLibrary() {
+		// given
+		final Long idLibrary = 3L;
+		// when
+		List<LibraryEntity> libraryBeforeRemoved = libraryRepository.findAll();
+		List<BookEntity> booksBeforeRemovedLibrary = libraryRepository.fildAllBooks();
+		libraryRepository.delete(idLibrary);
+		List<BookEntity> allBooksAfterRomevedLibrary = libraryRepository.fildAllBooks();
+		List<LibraryEntity> libraryAfterRemoved = libraryRepository.findAll();
+		// then
+		assertTrue(booksBeforeRemovedLibrary.size() > allBooksAfterRomevedLibrary.size());
+		assertEquals(libraryAfterRemoved.size(), libraryBeforeRemoved.size() - 1);
+	}
+
 }

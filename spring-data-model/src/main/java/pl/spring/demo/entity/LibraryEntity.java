@@ -1,9 +1,17 @@
 package pl.spring.demo.entity;
 
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "LIBRARY")
@@ -15,10 +23,10 @@ public class LibraryEntity {
 	private String name;
 
 	@OneToMany(
-		mappedBy = "library_id",
-		cascade = CascadeType.ALL,
-		fetch = FetchType.EAGER)
-	private Collection<BookEntity> books;
+		mappedBy = "library",
+		cascade = CascadeType.REMOVE,
+		fetch = FetchType.LAZY)
+	private Set<BookEntity> books = new HashSet<>();
 
 	protected LibraryEntity() {
 	}
@@ -44,10 +52,10 @@ public class LibraryEntity {
 		this.name = name;
 	}
 	
-	public Collection<BookEntity> getBooks(){
+	public Set<BookEntity> getBooks(){
 		return books;
 	}
-	public void getBooks(Collection<BookEntity> books){
+	public void getBooks(Set<BookEntity> books){
 		this.books = books;;
 	}
 }
