@@ -17,10 +17,13 @@ public class BookEntity implements Serializable {
 	@JoinColumn(name = "library_id", nullable = false)
 	private LibraryEntity library;
 
-	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinTable(name = "BOOK_AUTHOR", joinColumns = {
-			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
-					@JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false) })
+	@ManyToMany(
+			fetch = FetchType.LAZY, 
+			cascade = CascadeType.ALL)
+	@JoinTable(
+			name = "BOOK_AUTHOR", 
+			joinColumns = {@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, 
+			inverseJoinColumns = {@JoinColumn(name = "AUTHOR_ID", nullable = false, updatable = false) })
 	private Set<AuthorEntity> authors = new HashSet<>();
 
 	// for hibernate
