@@ -7,9 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import pl.spring.demo.bookSearchCriteria.BookSearchCriteria;
-import pl.spring.demo.entity.BookEntity;
+import pl.spring.demo.mapper.BookMapper;
 import pl.spring.demo.repository.BookRepository;
 import pl.spring.demo.service.BookServiceSearchCriteria;
+import pl.spring.demo.to.BookTo;
 
 @Service
 @Transactional(readOnly = true)
@@ -19,7 +20,7 @@ public class BookServiceSearchCriteriaImpl implements BookServiceSearchCriteria 
     private BookRepository bookRepository;
     
 	@Override
-	public List<BookEntity> findBooksByCriteria(BookSearchCriteria bookSearchCriteria) {
-		return null;
+	public List<BookTo> findBooksByCriteria(BookSearchCriteria bookSearchCriteria) {
+		return BookMapper.map2To(bookRepository.findBooksByCriteria(bookSearchCriteria));
 	}
 }

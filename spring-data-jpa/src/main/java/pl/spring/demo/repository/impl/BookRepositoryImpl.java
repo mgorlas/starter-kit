@@ -28,13 +28,15 @@ public class BookRepositoryImpl implements BookSearchCriteriaRepository {
 			booleanBookBuilder.and(bookEntity.title.startsWithIgnoreCase(bookSearchCriteria.getTitle()));
 		}
 		if (bookSearchCriteria.getAuthor() != null) {
-			booleanBookBuilder
-					.or(bookEntity.authors.any().firstName.startsWithIgnoreCase(bookSearchCriteria.getTitle()));
-			booleanBookBuilder
-					.or(bookEntity.authors.any().lastName.startsWithIgnoreCase(bookSearchCriteria.getTitle()));
+			BooleanBuilder booleanAuthorBuilder = new BooleanBuilder();
+			booleanAuthorBuilder
+					.or(bookEntity.authors.any().firstName.startsWithIgnoreCase(bookSearchCriteria.getAuthor()));
+			booleanAuthorBuilder
+					.or(bookEntity.authors.any().lastName.startsWithIgnoreCase(bookSearchCriteria.getAuthor()));
+			booleanBookBuilder.andAnyOf(booleanAuthorBuilder);
 		}
-		if (bookSearchCriteria.getTitle() != null) {
-			booleanBookBuilder.and(bookEntity.library.name.startsWithIgnoreCase(bookSearchCriteria.getTitle()));
+		if (bookSearchCriteria.getLibraryName() != null) {
+			booleanBookBuilder.and(bookEntity.library.name.startsWithIgnoreCase(bookSearchCriteria.getLibraryName()));
 		}
 		return query.from(bookEntity).where(booleanBookBuilder).list(bookEntity);
 	}
