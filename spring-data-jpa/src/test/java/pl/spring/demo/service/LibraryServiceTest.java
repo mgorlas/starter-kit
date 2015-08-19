@@ -11,14 +11,16 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import pl.spring.demo.entity.LibraryEntity;
+import pl.spring.demo.to.BookTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
 public class LibraryServiceTest {
 
-
 	@Autowired
 	private LibraryService libraryService;
+	@Autowired
+	private BookService bookService;
 
 	@Test
 	public void testShouldRemoveAllBookInLibrary() {
@@ -26,10 +28,14 @@ public class LibraryServiceTest {
 		final Long idLibrary = 3L;
 		// when
 		List<LibraryEntity> libraryBeforeRemoved = libraryService.findAll();
+		List<BookTo> bookBeforeRemoved = bookService.findAllBooks();
+	
 		libraryService.deleteLibrary(idLibrary);
 		List<LibraryEntity> libraryAfterRemoved = libraryService.findAll();
+		List<BookTo> bookAfterRemoved = bookService.findAllBooks();
 		// then
-		assertEquals(libraryAfterRemoved.size(), libraryBeforeRemoved.size() - 1);
+		assertTrue(libraryAfterRemoved.size() < libraryBeforeRemoved.size());
+		assertTrue(bookAfterRemoved.size() < bookBeforeRemoved.size());
 	}
 
 }
