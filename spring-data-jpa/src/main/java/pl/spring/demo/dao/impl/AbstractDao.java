@@ -1,6 +1,8 @@
 package pl.spring.demo.dao.impl;
 
-import pl.spring.demo.dao.Dao;
+import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,9 +10,8 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.transaction.Transactional;
-import java.io.Serializable;
-import java.lang.reflect.ParameterizedType;
-import java.util.List;
+
+import pl.spring.demo.dao.Dao;
 
 @Transactional(Transactional.TxType.SUPPORTS)
 public abstract class AbstractDao<T, K extends Serializable> implements Dao<T, K> {
@@ -27,19 +28,16 @@ public abstract class AbstractDao<T, K extends Serializable> implements Dao<T, K
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T getOne(K id) {
         return entityManager.getReference(getDomainClass(), id);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public T findOne(K id) {
         return entityManager.find(getDomainClass(), id);
     }
 
     @Override
-    @SuppressWarnings("unchecked")
     public List<T> findAll() {
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<T> criteriaQuery = builder.createQuery(getDomainClass());
