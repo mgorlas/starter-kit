@@ -35,6 +35,11 @@ public class LibraryEntity {
 		this.id = id;
 		this.name = name;
 	}
+	public LibraryEntity(Long id, String name, Set<BookEntity> books) {
+		this.id = id;
+		this.name = name;
+		this.books = books;
+	}
 
 	public Long getId() {
 		return id;

@@ -1,6 +1,6 @@
 package pl.spring.demo.service;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
@@ -10,8 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import pl.spring.demo.entity.LibraryEntity;
 import pl.spring.demo.to.BookTo;
+import pl.spring.demo.to.LibraryTo;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "CommonServiceTest-context.xml")
@@ -27,11 +27,11 @@ public class LibraryServiceTest {
 		// given
 		final Long idLibrary = 3L;
 		// when
-		List<LibraryEntity> libraryBeforeRemoved = libraryService.findAll();
+		List<LibraryTo> libraryBeforeRemoved = libraryService.findAll();
 		List<BookTo> bookBeforeRemoved = bookService.findAllBooks();
 	
 		libraryService.deleteLibrary(idLibrary);
-		List<LibraryEntity> libraryAfterRemoved = libraryService.findAll();
+		List<LibraryTo> libraryAfterRemoved = libraryService.findAll();
 		List<BookTo> bookAfterRemoved = bookService.findAllBooks();
 		// then
 		assertTrue(libraryAfterRemoved.size() < libraryBeforeRemoved.size());

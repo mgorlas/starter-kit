@@ -33,7 +33,7 @@ public class BookRepositoryImpl implements BookSearchCriteriaRepository {
 					.or(bookEntity.authors.any().firstName.startsWithIgnoreCase(bookSearchCriteria.getAuthor()));
 			booleanAuthorBuilder
 					.or(bookEntity.authors.any().lastName.startsWithIgnoreCase(bookSearchCriteria.getAuthor()));
-			booleanBookBuilder.andAnyOf(booleanAuthorBuilder);
+			booleanBookBuilder.and(booleanAuthorBuilder);
 		}
 		if (bookSearchCriteria.getLibraryName() != null) {
 			booleanBookBuilder.and(bookEntity.library.name.startsWithIgnoreCase(bookSearchCriteria.getLibraryName()));

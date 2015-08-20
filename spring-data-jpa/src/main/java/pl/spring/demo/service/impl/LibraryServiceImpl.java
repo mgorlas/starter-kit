@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import pl.spring.demo.entity.LibraryEntity;
+import pl.spring.demo.mapper.LibraryMapper;
 import pl.spring.demo.repository.LibraryRepository;
 import pl.spring.demo.service.LibraryService;
+import pl.spring.demo.to.LibraryTo;
 
 @Service
 @Transactional(readOnly = true)
@@ -24,7 +25,7 @@ public class LibraryServiceImpl implements LibraryService {
     }
 
 	@Override
-	public List<LibraryEntity> findAll() {
-		return libraryRepository.findAll();
+	public List<LibraryTo> findAll() {
+		return LibraryMapper.map2To(libraryRepository.findAll());
 	}
 }
