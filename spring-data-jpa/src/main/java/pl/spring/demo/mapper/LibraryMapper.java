@@ -26,12 +26,12 @@ public class LibraryMapper {
         return null;
     }
 
-    public static List<LibraryTo> map2To(List<LibraryEntity> bookEntities) {
-        return bookEntities.stream().map(LibraryMapper::map).collect(Collectors.toList());
+    public static List<LibraryTo> map2To(List<LibraryEntity> libraries) {
+        return libraries.stream().map(LibraryMapper::map).collect(Collectors.toList());
     }
 
-    public static List<LibraryEntity> map2Entity(List<LibraryTo> bookEntities) {
-        return bookEntities.stream().map(LibraryMapper::map).collect(Collectors.toList());
+    public static List<LibraryEntity> map2Entity(List<LibraryTo> libraryEntities) {
+        return libraryEntities.stream().map(LibraryMapper::map).collect(Collectors.toList());
     }
 
     private static Collection<BookTo> mapBooks(Collection<BookEntity> books) {
