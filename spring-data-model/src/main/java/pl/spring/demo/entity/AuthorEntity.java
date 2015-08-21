@@ -9,9 +9,9 @@ public class AuthorEntity implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column(nullable = false, length = 200)
-	private String firstName;
 	@Column(nullable = true, length = 200)
+	private String firstName;
+	@Column(nullable = false, length = 200)
 	private String lastName;
 
 	// for hibernate

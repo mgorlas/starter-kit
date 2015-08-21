@@ -1,10 +1,10 @@
 package pl.spring.demo.mapper;
 
-import pl.spring.demo.entity.AuthorEntity;
-import pl.spring.demo.to.AuthorTo;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import pl.spring.demo.entity.AuthorEntity;
+import pl.spring.demo.to.AuthorTo;
 
 public class AuthorMapper {
 
