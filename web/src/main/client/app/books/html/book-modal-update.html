@@ -6,11 +6,11 @@
 	<div class="modal-body">
 		<div class="form-group">
 			<label for="text">New title :</label> 
-			<input type="text" class="form-control" ng-model="title"  placeholder="new title book">		
+			<input type="text" class="form-control" ng-model="title"  ng-minlength="2" placeholder="new title book" required>		
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-click="updateTitleBook()">Save</button>
+		<button class="btn btn-success" ng-disabled="!title"ng-click="updateBook()">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>
