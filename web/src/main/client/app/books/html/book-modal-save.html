@@ -16,7 +16,7 @@
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-disabled="!(!!title&&!!firstName&&!!lastName)" ng-click="">Save</button>
+		<button class="btn btn-success" ng-disabled="!(!!title&&!!firstName&&!!lastName)" ng-click="addBook();$dismiss()">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>

@@ -1,9 +1,9 @@
-angular.module('app.authors').factory('authorService', function (authorRestService) {
+angular.module('app.authors').factory('authorSearchService', function (authorSearchRestService) {
     'use strict';
 
     return {
-        search: function (namePrefix) {
-            return authorRestService.search(namePrefix);
+        searchAll: function () {
+            return authorSearchRestService.searchAll();
         } 
     };
 });

@@ -1,9 +1,9 @@
-angular.module('app.authors').factory('authorRestService', function ($http, currentContextPath) {
+angular.module('app.authors').factory('authorSearchRestService', function ($http, currentContextPath) {
     'use strict';
 
     return {
-        search: function (namePrefix) {
-            return $http.get(currentContextPath.get() + 'rest/authors/autors-by-name', {params: {namePrefix: namePrefix}});
+        searchAll: function () {
+            return $http.get(currentContextPath.get() + 'rest/authors//authors-list');
         }
     };
 });

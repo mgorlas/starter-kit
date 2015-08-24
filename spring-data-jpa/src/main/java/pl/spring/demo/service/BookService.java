@@ -12,7 +12,7 @@ public interface BookService {
 
 	List<BookTo> findBooksByAuthor(String author);
 
-	BookTo saveBook(BookTo book);
+	BookTo saveBook(BookTo bookTo);
 
 	void updateTitleBook(BookTo book);
 

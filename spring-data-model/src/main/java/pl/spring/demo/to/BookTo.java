@@ -8,6 +8,10 @@ public class BookTo {
     public BookTo() {
     }
 
+    public BookTo(String title) {
+    	this.title = title;
+    }
+    
     public BookTo(Long id, String title, String authors) {
         this.id = id;
         this.title = title;

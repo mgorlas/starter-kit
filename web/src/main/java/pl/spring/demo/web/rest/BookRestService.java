@@ -30,8 +30,8 @@ public class BookRestService {
 	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
-	public BookTo saveBook(@RequestBody BookTo book) {
-		return bookService.saveBook(book);
+	public BookTo saveBook(@RequestBody BookTo bookTo) {
+		return bookService.saveBook(bookTo);
 	}
 
 	@RequestMapping(value = "/book-update-title", method = RequestMethod.POST)

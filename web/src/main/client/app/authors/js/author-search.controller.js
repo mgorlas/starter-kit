@@ -1,4 +1,4 @@
-angular.module('app.authors').controller('AuthorSearchController', function ($scope, $window, $location, authorService, Flash) {
+angular.module('app.authors').controller('AuthorSearchController', function ($scope, $window, $location, authorSearchService, Flash) {
     'use strict';
 
     $scope.authors = [];
@@ -6,7 +6,7 @@ angular.module('app.authors').controller('AuthorSearchController', function ($sc
     $scope.prefix = '';
 
     $scope.$on('$viewContentLoaded', function () {
-    	authorService.search($scope.prefix).then(function (response) {
+    	authorSearchService.searchAll().then(function (response) {
             angular.copy(response.data, $scope.authors);
         }, function () {
             Flash.create('danger', 'Wyjątek', 'custom-class');

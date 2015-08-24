@@ -1,5 +1,6 @@
 package pl.spring.demo.mapper;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -19,7 +20,7 @@ public class BookMapper {
 
     public static BookEntity map(BookTo bookTo) {
         if (bookTo != null) {
-            return new BookEntity(bookTo.getId(), bookTo.getTitle());
+            return new BookEntity(bookTo.getId(), bookTo.getTitle(), mapAuthors(bookTo.getAuthors()));
         }
         return null;
     }
@@ -38,5 +39,19 @@ public class BookMapper {
                     (", "));
         }
         return null;
+    }
+    private static Collection<AuthorEntity> mapAuthors(String authors) {
+    	if (!authors.isEmpty()) {
+    		String[] splitAuthor = authors.split(",");
+    		Collection<AuthorEntity> authorsEntities = new ArrayList<>();
+    		for (int i = 0; i < splitAuthor.length; i++) {
+    			String[] nextAuthor = splitAuthor[i].split("\\s+");
+    			if(nextAuthor.length > 0 && nextAuthor[0] != " ") {
+    				authorsEntities.add(new AuthorEntity(null, nextAuthor.length > 0 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : ""));
+    			}
+    		}
+    		return authorsEntities;
+    	}
+    	return null;
     }
 }

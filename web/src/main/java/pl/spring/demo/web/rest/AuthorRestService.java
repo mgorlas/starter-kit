@@ -30,6 +30,12 @@ public class AuthorRestService {
 		return authorService.findAuthorByName(namePrefix);
 	}
     
+    
+    @RequestMapping(value = "/authors-list", method = RequestMethod.GET)
+    public List<AuthorTo> findAllAuthors() {
+    	return authorService.findAllAuthors();
+    }
+    
     @RequestMapping(value = "/author", method = RequestMethod.POST)
     public AuthorTo saveAuthor(@RequestBody AuthorTo author) {
         return authorService.saveAuthor(author);

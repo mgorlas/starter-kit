@@ -31,10 +31,10 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     };
     
     $scope.addBook = function () {
-        $modal.open({
+      var modalAdd = $modal.open({
             templateUrl: 'books/html/book-modal-save.html',
-            controller: 'BookModalController',
-            size: 'lg'
+            controller: 'BookAddController',
+            size: 'lg',
         });
     };
     
@@ -48,11 +48,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     				return book;
     			}
     		}
-    	}).then(function (response) {
-    			angular.copy(response.data, $scope.books);
-        }, function () {
-            Flash.create('danger', 'Wyjątek', 'custom-class');
-        });
+    	});
     	
     };
 });
