@@ -5,11 +5,11 @@ angular.module('app.authors').controller('AuthorSearchController', function ($sc
     $scope.gridOptions = { data: 'authors' };
     $scope.prefix = '';
 
-    $scope.search = function () {
+    $scope.$on('$viewContentLoaded', function () {
     	authorService.search($scope.prefix).then(function (response) {
             angular.copy(response.data, $scope.authors);
         }, function () {
             Flash.create('danger', 'Wyjątek', 'custom-class');
         });
-    };
+    });
 });
