@@ -14,7 +14,7 @@ public interface BookService {
 
 	BookTo saveBook(BookTo book);
 
-	void updateTitleBook(Long id, String title);
+	void updateTitleBook(BookTo book);
 
 	void deleteBook(long id);
 }

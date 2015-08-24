@@ -5,21 +5,18 @@
 	<div class="modal-body">
 		<div class="form-group">
 			<label for="text">Title :</label> 
-			<input type="text" class="form-control" ng-model="title" placeholder="title book">		
+			<input type="text" class="form-control" ng-model="title" ng-minlength="2" placeholder="title book" required>		
 		</div>
 		<label for="text">Author</label>
 		<div class="form-group"> 
 			<label for="text">First name:</label> 
-			<input type="text"  class="form-control" ng-model="firstName" placeholder="first name"> 
+			<input type="text"  class="form-control" ng-model="firstName" ng-minlength="2" placeholder="first name" required> 
 			<label for="text">Last name:</label> 
-			<input type="text"  class="form-control" ng-model="lastName" placeholder="last name">
-			
-			 <pre>Model: {{selected | json}}</pre>
-    		<input type="text" ng-model="selected" typeahead="first_name for state in author | filter:$viewValue | limitTo:8" class="form-control">
+			<input type="text"  class="form-control" ng-model="lastName" ng-minlength="2" placeholder="last name" required>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-click="">Save</button>
+		<button class="btn btn-success" ng-disabled="!(!!title&&!!firstName&&!!lastName)" ng-click="">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>

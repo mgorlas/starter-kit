@@ -34,10 +34,9 @@ public class BookRestService {
 		return bookService.saveBook(book);
 	}
 
-	@RequestMapping(value = "/book-update-title", method = RequestMethod.PUT)
-	public void updateTitleBook(@RequestParam(value = "bookId", required = false) Long id,
-			@RequestParam(value = "bookTitle", required = false) String title) {
-		bookService.updateTitleBook(id, title);
+	@RequestMapping(value = "/book-update-title", method = RequestMethod.POST)
+	public void updateTitleBook(@RequestBody BookTo book) {
+		bookService.updateTitleBook(book);
 	}
 
 	@RequestMapping(value = "/book/{id}", method = RequestMethod.DELETE)

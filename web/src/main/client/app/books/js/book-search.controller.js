@@ -15,14 +15,6 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         }
     };
 
-    $scope.search = function () {
-        bookService.search($scope.prefix).then(function (response) {
-            angular.copy(response.data, $scope.books);
-        }, function () {
-            Flash.create('danger', 'Wyjątek', 'custom-class');
-        });
-    };
-
     $scope.deleteBook = function (bookId) {
         bookService.deleteBook(bookId).then(function () {
             removeBookById(bookId);
@@ -30,6 +22,14 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         });
     };
 
+    $scope.search = function () {
+        bookService.search($scope.prefix).then(function (response) {
+            angular.copy(response.data, $scope.books);
+        }, function () {
+            Flash.create('danger', 'Wyjątek', 'custom-class');
+        });
+    };
+    
     $scope.addBook = function () {
         $modal.open({
             templateUrl: 'books/html/book-modal-save.html',
@@ -44,11 +44,15 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     		controller: 'BookUpdateController',
     		size: 'lg',
     		resolve: {
-    			book: function (){
+    			book: function () {
     				return book;
     			}
     		}
-    	});
+    	}).then(function (response) {
+    			angular.copy(response.data, $scope.books);
+        }, function () {
+            Flash.create('danger', 'Wyjątek', 'custom-class');
+        });
+    	
     };
-
 });

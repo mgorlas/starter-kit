@@ -49,7 +49,8 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void updateTitleBook(Long id, String title) {
-		bookRepository.updateTitleBook(id, title);
+	@Transactional(readOnly = false)
+	public void updateTitleBook(BookTo bookTo) {
+		bookRepository.updateTitleBook(bookTo.getId(), bookTo.getTitle());
 	}
 }
