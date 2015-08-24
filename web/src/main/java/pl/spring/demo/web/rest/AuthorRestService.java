@@ -23,7 +23,7 @@ public class AuthorRestService {
     private AuthorService authorService;
 
     @RequestMapping(value = "/autors-by-name", method = RequestMethod.GET)
-	public List<AuthorTo> findAuthorssByName(@RequestParam(value = "namePrefix", required = false) String namePrefix) {
+	public List<AuthorTo> findAuthorsByName(@RequestParam(value = "namePrefix", required = false) String namePrefix) {
 		if (StringUtils.isEmpty(namePrefix)) {
 			return authorService.findAllAuthors();
 		}

@@ -2,8 +2,8 @@ angular.module('app.authors').factory('authorRestService', function ($http, curr
     'use strict';
 
     return {
-        search: function (titlePrefix) {
-            return $http.get(currentContextPath.get() + 'rest/books/books-by-title', {params: {titlePrefix: titlePrefix}});
+        search: function (namePrefix) {
+            return $http.get(currentContextPath.get() + 'rest/authors/autors-by-name', {params: {namePrefix: namePrefix}});
         }
     };
 });

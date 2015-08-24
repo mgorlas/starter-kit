@@ -1,4 +1,4 @@
-angular.module('app', ['ngRoute',  'app.main', 'app.component1', 'app.books', 'flash'])
+angular.module('app', ['ngRoute',  'app.main', 'app.component1','app.authors', 'app.books', 'flash'])
     .config(function ($locationProvider) {
         'use strict';
         $locationProvider.html5Mode(false);

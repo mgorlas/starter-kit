@@ -1,8 +1,8 @@
-angular.module('app.authors').controller('AuthorSearchController', function ($scope, $window, $location, authorService, Flash, $modal) {
+angular.module('app.authors').controller('AuthorSearchController', function ($scope, $window, $location, authorService, Flash) {
     'use strict';
 
     $scope.authors = [];
-    $scope.gridOptions = { data: 'books' };
+    $scope.gridOptions = { data: 'authors' };
     $scope.prefix = '';
 
     $scope.search = function () {
