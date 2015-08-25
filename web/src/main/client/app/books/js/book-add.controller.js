@@ -1,16 +1,14 @@
-angular.module('app.books').controller('BookAddController',	function($scope, bookService, authorAddService, $modal) {
+angular.module('app.books').controller('BookAddController',	function($scope, bookService, $modal) {
 			'use strict';
 
 	$scope.title = '';
 	$scope.firstName = '';
 	$scope.lastName = '';
-	$scope.authors = [];
-
-	$scope.author = {
+	$scope.authors = [{
 		id : null,
-		firstName : $scope.firstName,
-		lastName : $scope.lastName
-	};
+		firstName : '',
+		lastName : ''
+	}];
 
 	$scope.book = {
 		id : null,
@@ -31,27 +29,19 @@ angular.module('app.books').controller('BookAddController',	function($scope, boo
 		}
 		return text.substr(0, text.length-2);
 	}
-
-	function addAuthor(){
-		$scope.author.firstName = $scope.firstName;
-		$scope.author.lastName = $scope.lastName;
-		$scope.authors.push($scope.author);
+	
+	$scope.removeAuthor = function (index) {
+		$scope.authors.splice(index, 1);
 	}
 	
 	$scope.addBook = function() {
-		addAuthor();
 		$scope.book.title = $scope.title;
 		$scope.book.authors = authorsString();
-
 		bookService.saveBook($scope.book);
-		var i = 0;
-		while (i < $scope.authors.length) {
-			authorAddService.saveAuthor($scope.authors[i]);
-			i++;
-		}
 	};
 
 	$scope.addNextAuthor = function() {
+
 		var modalInstance = $modal.open({
 			templateUrl : 'books/html/author-modal-add.html',
 			controller : 'AuthorAddController',

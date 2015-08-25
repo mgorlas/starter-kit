@@ -1,0 +1,17 @@
+<form>
+	<div class="modal-header">
+		<h3 class="modal-title">Add author</h3>
+	</div>
+	<div class="modal-body">
+		<div class="form-group ">
+			<label for="text">First name:</label> <input type="text" class="form-control" ng-model="nextFirstName" ng-minlength="2" placeholder="first name" required>
+		</div>
+		<div class="form-group ">
+			<label for="text">Last name:</label> <input type="text"	class="form-control" ng-model="nextLastName" ng-minlength="2" placeholder="last name" required>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button class="btn btn-success" ng-disabled="!(!!nextFirstName&&!!nextLastName)" ng-click="addAuthor()">Add author</button>
+		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
+	</div>
+</form>
