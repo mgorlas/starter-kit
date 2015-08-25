@@ -5,6 +5,15 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.gridOptions = { data: 'books' };
     $scope.prefix = '';
     $scope.authors = '';
+    
+    var searchAllBook = function () {
+    	bookService.searchAll().then(function (response) {
+    		angular.copy(response.data, $scope.books);
+    	}, function () {
+    		Flash.create('danger', 'Wyjątek', 'custom-class');
+    	   }
+    	);
+    }
 
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
@@ -30,12 +39,20 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         });
     };
     
+    
+    
     $scope.addBook = function () {
       var modalAdd = $modal.open({
             templateUrl: 'books/html/book-modal-save.html',
             controller: 'BookAddController',
-            size: 'lg',
+            size: 'lg'
         });
+      
+      modalAdd.result.then(function () {
+    	  searchAllBook();
+    	}, function () {
+    		Flash.create('danger', 'Wyjątek', 'custom-class');
+    	});
     };
     
     $scope.updateBook = function (book) {
@@ -49,6 +66,5 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     			}
     		}
     	});
-    	
     };
 });

@@ -46,8 +46,11 @@ public class BookMapper {
     		Collection<AuthorEntity> authorsEntities = new ArrayList<>();
     		for (int i = 0; i < splitAuthor.length; i++) {
     			String[] nextAuthor = splitAuthor[i].split("\\s+");
-    			if(nextAuthor.length > 0 && nextAuthor[0] != " ") {
-    				authorsEntities.add(new AuthorEntity(null, nextAuthor.length > 0 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : ""));
+    			if(nextAuthor.length > 2) {
+    			authorsEntities.add(new AuthorEntity(null, nextAuthor[0] + " " + nextAuthor[1], nextAuthor[2]));
+    			}
+    			else {
+    				authorsEntities.add(new AuthorEntity(null, nextAuthor.length > 0 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : null));
     			}
     		}
     		return authorsEntities;

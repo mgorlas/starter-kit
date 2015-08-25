@@ -28,6 +28,10 @@ public class BookRestService {
 		}
 		return bookService.findBooksByTitle(titlePrefix);
 	}
+	@RequestMapping(value = "/books", method = RequestMethod.GET)
+	public List<BookTo> findAllBooks() {
+		return bookService.findAllBooks();
+	}
 
 	@RequestMapping(value = "/book", method = RequestMethod.POST)
 	public BookTo saveBook(@RequestBody BookTo bookTo) {

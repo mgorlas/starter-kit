@@ -8,11 +8,16 @@
 			<input type="text" class="form-control" ng-model="title" ng-minlength="2" placeholder="title book" required>		
 		</div>
 		<label for="text">Author</label>
-		<div class="form-group"> 
+		<div class="form-inline" > 
+		<div class="form-group " > 
 			<label for="text">First name:</label> 
 			<input type="text"  class="form-control" ng-model="firstName" ng-minlength="2" placeholder="first name" required> 
+		</div>
+		<div class="form-group " > 
 			<label for="text">Last name:</label> 
 			<input type="text"  class="form-control" ng-model="lastName" ng-minlength="2" placeholder="last name" required>
+		</div>
+		<button type="button" class="btn btn-info" ng-disabled="!(!!firstName&&!!lastName)"  ng-click="addNextAuthor()">Add next author</button>
 		</div>
 	</div>
 	<div class="modal-footer">

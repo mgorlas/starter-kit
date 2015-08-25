@@ -5,6 +5,9 @@ angular.module('app.books').factory('bookService', function (bookRestService) {
         search: function (titlePrefix) {
             return bookRestService.search(titlePrefix);
         },
+        searchAll: function () {
+        	return bookRestService.searchAll();
+        },
         saveBook: function (book) {
         	return bookRestService.saveBook(book);
         },
