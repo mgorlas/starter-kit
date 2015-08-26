@@ -1,4 +1,4 @@
-describe('book controller', function () {
+describe('bookController', function () {
     'use strict';
 
     beforeEach(function () {
