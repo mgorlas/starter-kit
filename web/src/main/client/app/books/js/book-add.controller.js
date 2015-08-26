@@ -1,4 +1,4 @@
-angular.module('app.books').controller('BookAddController',	function($scope, bookService, $modal) {
+angular.module('app.books').controller('BookAddController',	function($scope, bookService, $modal, $modalInstance) {
 			'use strict';
 
 	$scope.title = '';
@@ -32,23 +32,26 @@ angular.module('app.books').controller('BookAddController',	function($scope, boo
 	
 	$scope.removeAuthor = function (index) {
 		$scope.authors.splice(index, 1);
-	}
+	};
 	
-	$scope.addBook = function() {
-		$scope.book.title = $scope.title;
+	$scope.addBook = function(booleanTitle, booleanFirstName, booleanLastName) {
+		if(booleanTitle, booleanFirstName, booleanLastName){
+			$scope.book.title = $scope.title;
 		$scope.book.authors = authorsString();
 		bookService.saveBook($scope.book);
+		$modalInstance.close();
+		}
 	};
 
 	$scope.addNextAuthor = function() {
 
-		var modalInstance = $modal.open({
+		var modalAuthor = $modal.open({
 			templateUrl : 'books/html/author-modal-add.html',
 			controller : 'AuthorAddController',
 			size : 'lg',
 		});
 
-		modalInstance.result.then(function(result) {
+		modalAuthor.result.then(function(result) {
 			$scope.authors.push(result);
 		});
 	};

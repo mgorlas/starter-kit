@@ -1,32 +1,53 @@
 <!DOCTYPE html>
 <html>
 <body>
-<section>
-    <div flash-message="5000" ></div>
+	<section>
+		<div flash-message="5000000000">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">5000</span>
+			</button>
+			
+		</div>
 
-    <p class="getTitleBookText">Enter title book:</p>
-    <input type="text" ng-model="prefix">
-    <button ng-click="search()">Search</button>
-    <button ng-click="addBook()">Add book</button>
+		<div class="form-inline">
+			<div class="textTitleBook">
+				<h4>Enter title book:</h4>
+			</div>
+			<div class="input-group">
+				<input type="text" class="form-control" ng-model="prefix" placeholder="Search for..."> <span class="input-group-btn">
+					<button class="btn btn-primary" type="button" ng-click="search()">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+					</button>
+				</span>
+			</div>
+			<button type="button" class="btn btn-success" ng-click="addBook()">Add book</button>
+		</div>
 
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Authors</th>
-            <th>Delete</th>
-            <th>Edit</th>
-        </tr>
-        <tr ng-repeat="book in books">
-            <td>{{ book.title }}</td>
-            <td>{{ book.authors }}</td>
-            <td>
-                <button ng-click="deleteBook(book.id)">Delete</button>
-            </td>
-             <td>
-                <button ng-click="updateBook(book)">Edit</button>
-            </td>
-        </tr>
-    </table>
-</section>
+		<div class="table-responsive">
+			<table class="table table-bordered table-hover">
+				<tr>
+					<th>Title</th>
+					<th>Authors</th>
+					<th>Edit</th>
+					<th>Remove</th>
+				</tr>
+				<tr ng-repeat="book in books">
+					<td>{{ book.title }}</td>
+					<td>{{ book.authors }}</td>
+					<td>
+						<button class="btn btn-info" ng-click="updateBook(book)">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true">
+						</button>
+					</td>
+					<td>
+						<button class="btn btn-danger" ng-click="deleteBook(book.id)">
+							<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+						</button>
+					</td>
+				</tr>
+			</table>
+		</div>
+	</section>
 </body>
 </html>
+

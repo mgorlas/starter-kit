@@ -1,28 +1,28 @@
-<form>
+<form name="saveBookForm" validate>
 	<div class="modal-header">
 		<h3 class="modal-title">Add book</h3>
 	</div>
 	<div class="modal-body">
 		<div class="form-group">
 			<label for="text">Title :</label> 
-			<input type="text" class="form-control" ng-model="title" ng-minlength="2" placeholder="title book" required>		
+			<input type="text" class="form-control" name="inputTitle" ng-model="title" ng-minlength="2" placeholder="title book" required>		
 		</div>
 		<label for="text">Author</label>
 		<div class="form-inline" ng-repeat="author in authors"> 
 		<div class="form-group " > 
 			<label for="text">First name:</label> 
-			<input type="text"  class="form-control" ng-minlength="2" ng-model="author.firstName" required> 
+			<input type="text"  class="form-control" name="inputFirstName" ng-minlength="2" ng-model="author.firstName" required> 
 		</div>
 		<div class="form-group " > 
 			<label for="text">Last name:</label> 
-			<input type="text"  class="form-control" ng-minlength="2" ng-model="author.lastName" required>
+			<input type="text"  class="form-control" name="inputLastName" ng-minlength="2" ng-model="author.lastName" required>
 		</div>
 		<button type="button" class="btn btn-warning"   ng-click="removeAuthor($index)">Remove author</button>
 		</div>
-		<button type="button" class="btn btn-info"   ng-click="addNextAuthor()">Add next author</button>
+		<button type="button" class="btn btn-info addnextauthor"   ng-click="addNextAuthor()">Add next author</button>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-click="addBook();$close()">Save</button>
+		<button class="btn btn-success" ng-click="addBook(saveBookForm.inputTitle.$valid, saveBookForm.inputFirstName.$valid, saveBookForm.inputLastName.$valid)">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>

@@ -6,14 +6,14 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.prefix = '';
     $scope.authors = '';
     
-    var searchAllBook = function () {
+    $scope.searchAll = function () {
     	bookService.searchAll().then(function (response) {
     		angular.copy(response.data, $scope.books);
     	}, function () {
     		Flash.create('danger', 'Wyjątek', 'custom-class');
     	   }
     	);
-    }
+    };
 
     var removeBookById = function (bookId) {
         for (var i = 0; i < $scope.books.length; i = i + 1) {
@@ -27,7 +27,7 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     $scope.deleteBook = function (bookId) {
         bookService.deleteBook(bookId).then(function () {
             removeBookById(bookId);
-            Flash.create('success', 'Książka została usunięta.', 'custom-class');
+            Flash.create('success', '<span class="glyphicon glyphicon-ok flashOk" aria-hidden="true"></span><strong>Well done!</strong> The book has been removed.', 'custom-class');
         });
     };
 
@@ -49,14 +49,13 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
         });
       
       modalAdd.result.then(function () {
-    	  searchAllBook();
-    	}, function () {
-    		Flash.create('danger', 'Wyjątek', 'custom-class');
+    	  $scope.searchAll();
+    	  Flash.create('success', '<span class="glyphicon glyphicon-ok flashOk" aria-hidden="true"></span><strong>Well done!</strong> New book has been added.', 'custom-class');
     	});
     };
     
     $scope.updateBook = function (book) {
-    	$modal.open({
+    	var modalInstance = $modal.open({
     		templateUrl: 'books/html/book-modal-update.html',
     		controller: 'BookUpdateController',
     		size: 'lg',
@@ -66,5 +65,9 @@ angular.module('app.books').controller('BookSearchController', function ($scope,
     			}
     		}
     	});
+    	modalInstance.result.then(function () {
+    		$scope.searchAll();
+      	  Flash.create('success', '<span class="glyphicon glyphicon-ok flashOk" aria-hidden="true"></span><strong>Well done!</strong> The book has been updated.', 'custom-class');
+      	});
     };
 });

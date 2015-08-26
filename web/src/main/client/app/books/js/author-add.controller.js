@@ -4,18 +4,22 @@ angular.module('app.books').controller('AuthorAddController', function ($scope, 
     $scope.nextFirstName = '';
     $scope.nextLastName = '';
     
-    $scope.authorNext = {
+    $scope.newAuthor = {
         	id : null,
         	firstName : '',
         	lastName :  ''
      };
          
     
-    $scope.addAuthor = function () {
-    	 $scope.authorNext.firstName = $scope.nextFirstName;
-    	 $scope.authorNext.lastName = $scope.nextLastName;
-        $modalInstance.close($scope.authorNext);
+    $scope.addAuthor = function (booleanFirstName, booleanLastName) {
+    	if(booleanFirstName, booleanLastName){
+    		$scope.newAuthor.firstName = $scope.nextFirstName;
+    		$scope.newAuthor.lastName = $scope.nextLastName;
+    		$modalInstance.close($scope.newAuthor);
+    	}
     };
+    
+    
  
 });
 

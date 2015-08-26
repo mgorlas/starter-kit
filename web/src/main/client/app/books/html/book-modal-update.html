@@ -1,4 +1,4 @@
-<form>
+<form name="updateBookForm" validate>
 	<div class="modal-header">
 		<h3 class="modal-title">Update book "{{book.title}}"</h3>
 		
@@ -6,11 +6,11 @@
 	<div class="modal-body">
 		<div class="form-group">
 			<label for="text">New title :</label> 
-			<input type="text" class="form-control" ng-model="newTitle"  ng-minlength="2" placeholder="new title book" required>		
+			<input type="text" class="form-control" name="inputTitle" ng-model="newTitle"  ng-minlength="2" placeholder="new title book" required>		
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-disabled="!newTitle" ng-click="updateBook();$close()">Save</button>
+		<button class="btn btn-success"  ng-click="updateBook(updateBookForm.inputTitle.$valid)">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>
