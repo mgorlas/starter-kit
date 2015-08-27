@@ -4,17 +4,9 @@ angular.module('app.books').controller('BookAddController',	function($scope, boo
 	$scope.title = '';
 	$scope.firstName = '';
 	$scope.lastName = '';
-	$scope.authors = [{
-		id : null,
-		firstName : '',
-		lastName : ''
-	}];
+	$scope.authors = [{id : null, firstName : '', lastName : ''}];
 
-	$scope.book = {
-		id : null,
-		title : $scope.title,
-		authors : ''
-	};
+	$scope.book = { id : null, title : $scope.title, authors : '' };
 
 	function authorToString(authorData) {
 		return authorData.firstName + ' ' + authorData.lastName;
@@ -37,20 +29,18 @@ angular.module('app.books').controller('BookAddController',	function($scope, boo
 	$scope.addBook = function(booleanTitle, booleanFirstName, booleanLastName) {
 		if(booleanTitle, booleanFirstName, booleanLastName){
 			$scope.book.title = $scope.title;
-		$scope.book.authors = authorsString();
-		bookService.saveBook($scope.book);
-		$modalInstance.close();
+			$scope.book.authors = authorsString();
+			bookService.saveBook($scope.book);
+			$modalInstance.close();
 		}
 	};
 
 	$scope.addNextAuthor = function() {
-
 		var modalAuthor = $modal.open({
 			templateUrl : 'books/html/author-modal-add.html',
 			controller : 'AuthorAddController',
 			size : 'lg',
 		});
-
 		modalAuthor.result.then(function(result) {
 			$scope.authors.push(result);
 		});
