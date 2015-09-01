@@ -37,6 +37,10 @@ public class BookRestService {
 	public BookTo saveBook(@RequestBody BookTo bookTo) {
 		return bookService.saveBook(bookTo);
 	}
+	@RequestMapping(value = "/book-parameters", method = RequestMethod.POST)
+	public BookTo saveBook(@RequestParam(value = "title", required = false) String title, @RequestParam(value = "authors", required = false) String authors) {
+		return bookService.saveBook(new BookTo(null, title, authors));
+	}
 
 	@RequestMapping(value = "/book-update-title", method = RequestMethod.POST)
 	public void updateTitleBook(@RequestBody BookTo book) {

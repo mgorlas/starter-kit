@@ -50,7 +50,7 @@ public class BookMapper {
     			authorsEntities.add(new AuthorEntity(null, nextAuthor[0] + " " + nextAuthor[1], nextAuthor[2]));
     			}
     			else {
-    				authorsEntities.add(new AuthorEntity(null, nextAuthor.length > 0 ? nextAuthor[0] : null, nextAuthor.length > 1 ? nextAuthor[1] : null));
+    				authorsEntities.add(new AuthorEntity(null, nextAuthor[0], nextAuthor.length > 1 ? nextAuthor[1] : ""));
     			}
     		}
     		return authorsEntities;
