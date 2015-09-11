@@ -27,7 +27,7 @@ angular.module('app.books').controller('BookAddController',	function($scope, boo
 	};
 	
 	$scope.addBook = function(booleanTitle, booleanFirstName, booleanLastName) {
-		if(booleanTitle, booleanFirstName, booleanLastName){
+		if(booleanTitle && booleanFirstName && booleanLastName){
 			$scope.book.title = $scope.title;
 			$scope.book.authors = authorsString();
 			bookService.saveBook($scope.book);

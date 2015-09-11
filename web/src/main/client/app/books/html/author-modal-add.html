@@ -4,14 +4,14 @@
 	</div>
 	<div class="modal-body">
 		<div class="form-group ">
-			<label for="text">First name:</label> <input type="text" name="inputFirstName" class="form-control" ng-model="nextFirstName" ng-minlength="2" placeholder="first name" required>
+			<label for="text">First name:</label> <input type="text" name="firstName" class="form-control" ng-model="nextFirstName" ng-minlength="2" placeholder="first name" required>
 		</div>
 		<div class="form-group ">
-			<label for="text">Last name:</label> <input type="text"	name="inputLastName" class="form-control" ng-model="nextLastName" ng-minlength="2" placeholder="last name" required>
+			<label for="text">Last name:</label> <input type="text"	name="lastName" class="form-control" ng-model="nextLastName" ng-minlength="2" placeholder="last name" required>
 		</div>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-click="addAuthor(authorAddForm.inputFirstName.$valid, authorAddForm.inputLastName.$valid)">Add author</button>
-		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
+		<button class="btn btn-success" name="addAuthor" ng-click="addAuthor(authorAddForm.firstName.$valid, authorAddForm.lastName.$valid)">Add author</button>
+		<button class="btn btn-danger" name="close" ng-click="$dismiss()">Close</button>
 	</div>
 </form>

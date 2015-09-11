@@ -22,7 +22,7 @@
 		<button type="button" class="btn btn-info addnextauthor"   ng-click="addNextAuthor()">Add next author</button>
 	</div>
 	<div class="modal-footer">
-		<button class="btn btn-success" ng-click="addBook(saveBookForm.inputTitle.$valid, saveBookForm.inputFirstName.$valid, saveBookForm.inputLastName.$valid)">Save</button>
+		<button class="btn btn-success" name="saveBook" ng-click="addBook(saveBookForm.inputTitle.$valid, saveBookForm.inputFirstName.$valid, saveBookForm.inputLastName.$valid)">Save</button>
 		<button class="btn btn-danger" ng-click="$dismiss()">Close</button>
 	</div>
 </form>
